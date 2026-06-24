@@ -1,0 +1,410 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 380" width="650" height="380">
+  <defs>
+    <!-- Importing a clean coding font -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap');
+
+      /* Base typography */
+      .term-text {
+        font-family: 'Fira Code', 'Courier New', Courier, monospace;
+        font-size: 13.5px;
+        fill: #cbd5e1;
+      }
+      .prompt-user {
+        fill: #38bdf8;
+        font-weight: 600;
+      }
+      .prompt-symbol {
+        fill: #f8fafc;
+      }
+      .cmd-text {
+        fill: #f8fafc;
+        font-weight: 600;
+      }
+      .output-info {
+        fill: #94a3b8;
+      }
+      .output-success {
+        fill: #22c55e;
+        font-weight: 600;
+      }
+      .table-header {
+        fill: #38bdf8;
+        font-weight: 600;
+      }
+      .table-border {
+        stroke: #334155;
+        stroke-width: 1;
+      }
+
+      /* Global Cursor Animation */
+      .cursor {
+        fill: #f8fafc;
+        animation: blink 0.8s infinite;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+      }
+
+      .cursor-move {
+        animation: moveCursorGlobal 24s infinite step-end;
+      }
+
+      @keyframes moveCursorGlobal {
+        /* Scene 1: 0s to 6.5s (0% to 27.1%) */
+        0% { transform: translate(0px, 0px); opacity: 1; }
+        1.7% { transform: translate(10px, 0px); }  /* s */
+        2.5% { transform: translate(20px, 0px); }  /* t */
+        3.3% { transform: translate(30px, 0px); }  /* h */
+        4.2% { transform: translate(40px, 0px); }  /*   */
+        5.0% { transform: translate(50px, 0px); }  /* k */
+        5.8% { transform: translate(60px, 0px); }  /* i */
+        6.7% { transform: translate(70px, 0px); }  /* l */
+        7.5% { transform: translate(80px, 0px); }  /* l */
+        8.8%, 27.1% { opacity: 0; }                 /* Hide on outputs */
+
+        /* Scene 2: 6.5s to 12.5s (27.1% to 52.1%) */
+        27.1% { transform: translate(0px, 0px); opacity: 1; }
+        28.8% { transform: translate(10px, 0px); }  /* s */
+        29.6% { transform: translate(20px, 0px); }  /* t */
+        30.4% { transform: translate(30px, 0px); }  /* h */
+        31.3% { transform: translate(40px, 0px); }  /*   */
+        32.1% { transform: translate(50px, 0px); }  /* i */
+        32.9% { transform: translate(60px, 0px); }  /* p */
+        34.6%, 52.1% { opacity: 0; }
+
+        /* Scene 3: 12.5s to 18.5s (52.1% to 77.1%) */
+        52.1% { transform: translate(0px, 0px); opacity: 1; }
+        53.8% { transform: translate(10px, 0px); }  /* s */
+        54.6% { transform: translate(20px, 0px); }  /* t */
+        55.4% { transform: translate(30px, 0px); }  /* h */
+        56.3% { transform: translate(40px, 0px); }  /*   */
+        57.1% { transform: translate(50px, 0px); }  /* d */
+        57.9% { transform: translate(60px, 0px); }  /* n */
+        58.8% { transform: translate(70px, 0px); }  /* s */
+        59.6%, 77.1% { opacity: 0; }
+
+        /* Scene 4: 18.5s to 24s (77.1% to 100%) */
+        77.1% { transform: translate(0px, 0px); opacity: 1; }
+        78.8% { transform: translate(10px, 0px); }  /* s */
+        79.6% { transform: translate(20px, 0px); }  /* t */
+        80.4% { transform: translate(30px, 0px); }  /* h */
+        81.3% { transform: translate(40px, 0px); }  /*   */
+        82.1% { transform: translate(50px, 0px); }  /* s */
+        82.9% { transform: translate(60px, 0px); }  /* y */
+        83.8% { transform: translate(70px, 0px); }  /* s */
+        84.6%, 97.9% { opacity: 0; }
+        100% { transform: translate(0px, 0px); opacity: 1; }
+      }
+
+      /* Typewriter Cover Animations */
+      .cmd-cover {
+        fill: #0f131a;
+      }
+      .cover-s1 { animation: type1 24s infinite linear; }
+      .cover-s2 { animation: type2 24s infinite linear; }
+      .cover-s3 { animation: type3 24s infinite linear; }
+      .cover-s4 { animation: type4 24s infinite linear; }
+
+      @keyframes type1 {
+        0% { width: 100px; }
+        1.7% { width: 100px; }
+        7.5% { width: 0px; }
+        100% { width: 0px; }
+      }
+      @keyframes type2 {
+        0%, 28.7% { width: 80px; }
+        32.9% { width: 0px; }
+        100% { width: 0px; }
+      }
+      @keyframes type3 {
+        0%, 53.7% { width: 90px; }
+        57.9% { width: 0px; }
+        100% { width: 0px; }
+      }
+      @keyframes type4 {
+        0%, 78.7% { width: 90px; }
+        82.9% { width: 0px; }
+        100% { width: 0px; }
+      }
+
+      /* Scene Parent Transition Setup */
+      .scene {
+        animation-duration: 24s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        opacity: 0;
+      }
+
+      /* Scene 1 (0s - 6.5s): sth kill */
+      .scene-1 { animation-name: s1; }
+      @keyframes s1 {
+        0%, 27.1% { opacity: 1; }
+        28.1%, 100% { opacity: 0; }
+      }
+
+      .s1-scan { animation: s1-scan-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s1-scan-fade {
+        0%, 8.7% { opacity: 0; }
+        8.8%, 27.1% { opacity: 1; }
+        28.1%, 100% { opacity: 0; }
+      }
+
+      .s1-list { animation: s1-list-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s1-list-fade {
+        0%, 11.6% { opacity: 0; }
+        11.7%, 27.1% { opacity: 1; }
+        28.1%, 100% { opacity: 0; }
+      }
+
+      .s1-selection-rect {
+        animation: s1-rect-move 24s infinite ease-in-out;
+        opacity: 0;
+      }
+      @keyframes s1-rect-move {
+        0%, 11.6% { opacity: 0; transform: translateY(0px); }
+        11.7%, 15.4% { opacity: 1; transform: translateY(0px); }
+        16.7%, 27.1% { opacity: 1; transform: translateY(22px); }
+        28.1%, 100% { opacity: 0; }
+      }
+      
+      .s1-port-1 { animation: s1-port-highlight-1 24s infinite step-end; }
+      @keyframes s1-port-highlight-1 {
+        0%, 11.6% { fill: #cbd5e1; font-weight: normal; }
+        11.7%, 15.4% { fill: #38bdf8; font-weight: 600; }
+        15.5%, 100% { fill: #cbd5e1; font-weight: normal; }
+      }
+      
+      .s1-port-2 { animation: s1-port-highlight-2 24s infinite step-end; }
+      @keyframes s1-port-highlight-2 {
+        0%, 15.4% { fill: #cbd5e1; font-weight: normal; }
+        15.5%, 27.1% { fill: #38bdf8; font-weight: 600; }
+        28.1%, 100% { fill: #cbd5e1; font-weight: normal; }
+      }
+
+      .s1-kill { animation: s1-kill-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s1-kill-fade {
+        0%, 18.7% { opacity: 0; }
+        18.8%, 27.1% { opacity: 1; }
+        28.1%, 100% { opacity: 0; }
+      }
+
+      .s1-succ { animation: s1-succ-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s1-succ-fade {
+        0%, 22.8% { opacity: 0; }
+        22.9%, 27.1% { opacity: 1; }
+        28.1%, 100% { opacity: 0; }
+      }
+
+      /* Scene 2 (6.5s - 12.5s): sth ip */
+      .scene-2 { animation-name: s2; }
+      @keyframes s2 {
+        0%, 26.1% { opacity: 0; }
+        27.1%, 52.1% { opacity: 1; }
+        53.1%, 100% { opacity: 0; }
+      }
+
+      .s2-output { animation: s2-output-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s2-output-fade {
+        0%, 34.5% { opacity: 0; }
+        34.6%, 52.1% { opacity: 1; }
+        53.1%, 100% { opacity: 0; }
+      }
+
+      .s2-public { animation: s2-public-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s2-public-fade {
+        0%, 39.5% { opacity: 0; }
+        39.6%, 52.1% { opacity: 1; }
+        53.1%, 100% { opacity: 0; }
+      }
+
+      /* Scene 3 (12.5s - 18.5s): sth dns */
+      .scene-3 { animation-name: s3; }
+      @keyframes s3 {
+        0%, 51.1% { opacity: 0; }
+        52.1%, 77.1% { opacity: 1; }
+        78.1%, 100% { opacity: 0; }
+      }
+
+      .s3-flush { animation: s3-flush-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s3-flush-fade {
+        0%, 59.5% { opacity: 0; }
+        59.6%, 77.1% { opacity: 1; }
+        78.1%, 100% { opacity: 0; }
+      }
+
+      .s3-succ { animation: s3-succ-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s3-succ-fade {
+        0%, 64.5% { opacity: 0; }
+        64.6%, 77.1% { opacity: 1; }
+        78.1%, 100% { opacity: 0; }
+      }
+
+      /* Scene 4 (18.5s - 24s): sth sys */
+      .scene-4 { animation-name: s4; }
+      @keyframes s4 {
+        0%, 72.9% { opacity: 0; }
+        75.0%, 97.9% { opacity: 1; }
+        98.9%, 100% { opacity: 0; }
+      }
+
+      .s4-dashboard { animation: s4-dashboard-fade 24s infinite ease-out; opacity: 0; }
+      @keyframes s4-dashboard-fade {
+        0%, 84.5% { opacity: 0; }
+        84.6%, 97.9% { opacity: 1; }
+        98.9%, 100% { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background Terminal Box -->
+  <rect width="650" height="380" rx="10" fill="#0f131a" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Window Header -->
+  <rect width="650" height="35" rx="10" fill="#1e293b" />
+  <rect y="25" width="650" height="10" fill="#1e293b" />
+  
+  <!-- Window Control Buttons -->
+  <circle cx="20" cy="17" r="6" fill="#ef4444" />
+  <circle cx="40" cy="17" r="6" fill="#eab308" />
+  <circle cx="60" cy="17" r="6" fill="#22c55e" />
+  <text x="325" y="22" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">sth - Command Showcase</text>
+
+  <!-- ================= SCENE 1: sth kill ================= -->
+  <g class="scene scene-1" transform="translate(25, 40)">
+    <!-- Shell Command line -->
+    <g transform="translate(0, 30)">
+      <text class="term-text prompt-user">Coderkube@DESKTOP</text>
+      <text class="term-text prompt-symbol" x="145">:~$ </text>
+      <text class="term-text cmd-text" x="180">sth kill</text>
+      <!-- Reveal typing masking rectangle -->
+      <rect class="cmd-cover cover-s1" x="180" y="15" width="100" height="20" />
+    </g>
+
+    <!-- Output elements -->
+    <g class="s1-scan" transform="translate(0, 60)">
+      <text class="term-text output-info">Scanning active listening TCP ports...</text>
+    </g>
+
+    <g class="s1-list" transform="translate(0, 95)">
+      <text class="term-text prompt-user">? Which port would you like to terminate?</text>
+      <g transform="translate(15, 15)">
+        <rect class="s1-selection-rect" x="-5" y="2" width="360" height="20" rx="3" fill="#1e293b" />
+        <text class="term-text s1-port-1" x="5" y="17">🔌 Port 135 (svchost.exe) [PID: 1260]</text>
+        <text class="term-text s1-port-2" x="5" y="39">🔌 Port 3000 (node.exe - express) [PID: 20396]</text>
+        <text class="term-text" x="5" y="61" fill="#64748b">🔌 Port 8080 (nginx.exe) [PID: 5412]</text>
+      </g>
+    </g>
+
+    <g class="s1-kill" transform="translate(0, 205)">
+      <text class="term-text output-info">Terminating process on port 3000...</text>
+    </g>
+
+    <g class="s1-succ" transform="translate(0, 235)">
+      <text class="term-text output-success">✔ Successfully terminated process "node.exe" (PID 20396) on port 3000</text>
+    </g>
+  </g>
+
+  <!-- ================= SCENE 2: sth ip ================= -->
+  <g class="scene scene-2" transform="translate(25, 40)">
+    <!-- Shell Command line -->
+    <g transform="translate(0, 30)">
+      <text class="term-text prompt-user">Coderkube@DESKTOP</text>
+      <text class="term-text prompt-symbol" x="145">:~$ </text>
+      <text class="term-text cmd-text" x="180">sth ip</text>
+      <!-- Reveal typing masking rectangle -->
+      <rect class="cmd-cover cover-s2" x="180" y="15" width="80" height="20" />
+    </g>
+
+    <!-- IP Resolution Outputs -->
+    <g class="s2-output" transform="translate(0, 60)">
+      <text class="term-text output-info">Gathering IP addresses...</text>
+      <text class="term-text" x="0" y="25" font-weight="600">🖥️ Local IPv4 Addresses:</text>
+      
+      <!-- IP Table -->
+      <g transform="translate(10, 40)">
+        <line x1="0" y1="0" x2="320" y2="0" class="table-border" />
+        <text class="term-text table-header" x="10" y="17">Interface</text>
+        <text class="term-text table-header" x="150" y="17">Local Address</text>
+        <line x1="0" y1="25" x2="320" y2="25" class="table-border" />
+        <text class="term-text" x="10" y="42">Ethernet</text>
+        <text class="term-text" x="150" y="42" fill="#22c55e">192.168.1.52</text>
+        <line x1="0" y1="52" x2="320" y2="52" class="table-border" />
+      </g>
+    </g>
+
+    <g class="s2-public" transform="translate(0, 195)">
+      <text class="term-text" x="0" y="0" font-weight="600">🌐 Public IP Address:</text>
+      <text class="term-text output-success" x="20" y="25">106.201.144.194</text>
+    </g>
+  </g>
+
+  <!-- ================= SCENE 3: sth dns ================= -->
+  <g class="scene scene-3" transform="translate(25, 40)">
+    <!-- Shell Command line -->
+    <g transform="translate(0, 30)">
+      <text class="term-text prompt-user">Coderkube@DESKTOP</text>
+      <text class="term-text prompt-symbol" x="145">:~$ </text>
+      <text class="term-text cmd-text" x="180">sth dns</text>
+      <!-- Reveal typing masking rectangle -->
+      <rect class="cmd-cover cover-s3" x="180" y="15" width="90" height="20" />
+    </g>
+
+    <!-- DNS Flush Output -->
+    <g class="s3-flush" transform="translate(0, 70)">
+      <text class="term-text output-info">Flushing system DNS cache...</text>
+    </g>
+    <g class="s3-succ" transform="translate(0, 100)">
+      <text class="term-text output-success">✔ DNS cache flushed successfully!</text>
+      <text class="term-text" x="0" y="30" fill="#64748b">Executed: ipconfig /flushdns</text>
+    </g>
+  </g>
+
+  <!-- ================= SCENE 4: sth sys ================= -->
+  <g class="scene scene-4" transform="translate(25, 40)">
+    <!-- Shell Command line -->
+    <g transform="translate(0, 30)">
+      <text class="term-text prompt-user">Coderkube@DESKTOP</text>
+      <text class="term-text prompt-symbol" x="145">:~$ </text>
+      <text class="term-text cmd-text" x="180">sth sys</text>
+      <!-- Reveal typing masking rectangle -->
+      <rect class="cmd-cover cover-s4" x="180" y="15" width="90" height="20" />
+    </g>
+
+    <!-- System Dashboard Output -->
+    <g class="s4-dashboard" transform="translate(0, 65)">
+      <text class="term-text" x="0" y="0" font-weight="600">🖥️ System Resource Dashboard:</text>
+      
+      <!-- System Dashboard Table -->
+      <g transform="translate(5, 15)">
+        <line x1="0" y1="0" x2="480" y2="0" class="table-border" />
+        <text class="term-text table-header" x="10" y="17">Metric</text>
+        <text class="term-text table-header" x="130" y="17">Details</text>
+        <line x1="0" y1="24" x2="480" y2="24" class="table-border" />
+        
+        <text class="term-text" x="10" y="41" font-weight="600">OS</text>
+        <text class="term-text" x="130" y="41">Windows (x64) - 10.0.26200</text>
+        
+        <text class="term-text" x="10" y="63" font-weight="600">CPU</text>
+        <text class="term-text" x="130" y="63">Intel(R) Core(TM) i5-9400F CPU @ 2.90GHz</text>
+        
+        <text class="term-text" x="10" y="85" font-weight="600">Memory</text>
+        <text class="term-text" x="130" y="85" fill="#eab308">10.63 GB / 15.92 GB (66.8% used)</text>
+        
+        <text class="term-text" x="10" y="107" font-weight="600">Node Version</text>
+        <text class="term-text" x="130" y="107" fill="#22c55e">v22.12.0</text>
+        
+        <line x1="0" y1="117" x2="480" y2="117" class="table-border" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Shared Blinking Cursor on Active Shell Line -->
+  <g transform="translate(25, 40)">
+    <g transform="translate(0, 30)">
+      <rect class="cursor cursor-move" x="180" y="-13" width="8" height="16" />
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,40 @@
+{
+  "name": "smart-terminal-handler",
+  "version": "1.0.0",
+  "description": "Cross-platform CLI and programmatic utilities to simplify daily terminal command executions like killing ports, flushing DNS, finding IPs, and cleaning dependencies.",
+  "main": "./src/index.js",
+  "bin": {
+    "sth": "./bin/cli.js",
+    "smart-terminal-handler": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "terminal",
+    "cli",
+    "helper",
+    "port-killer",
+    "dns-flush",
+    "cross-platform",
+    "ip-finder",
+    "developer-tools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coderkube-App/smart-terminal-handler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Coderkube-App/smart-terminal-handler/issues"
+  },
+  "homepage": "https://github.com/Coderkube-App/smart-terminal-handler#readme",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.3",
+    "commander": "^11.1.0",
+    "prompts": "^2.4.2"
+  }
+}
