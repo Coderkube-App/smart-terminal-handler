@@ -1,6 +1,6 @@
 {
   "name": "smart-terminal-handler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cross-platform CLI and programmatic utilities to simplify daily terminal command executions like killing ports, flushing DNS, finding IPs, and cleaning dependencies.",
   "main": "./src/index.js",
   "bin": {
