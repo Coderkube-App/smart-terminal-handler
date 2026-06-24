@@ -1,25 +1,39 @@
-# smart-terminal-handler
+<div align="center">
+  <h1>🚀 Smart Terminal Handler (<code>sth</code>)</h1>
+  <p><strong>A zero-config, cross-platform CLI and Node.js toolkit designed to supercharge your daily terminal workflows.</strong></p>
 
-A cross-platform Command Line Interface (CLI) and programmatic Node.js utility designed to simplify daily developer terminal operations. It transparently maps human-friendly commands to OS-specific terminal routines for Windows, macOS, and Linux.
+  [![npm version](https://img.shields.io/npm/v/smart-terminal-handler.svg?style=flat-square)](https://npmjs.org/package/smart-terminal-handler)
+  [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](https://opensource.org/licenses/ISC)
+  [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg?style=flat-square)](#)
 
-![Smart Terminal Handler Demo](assets/cli_demo.svg)
+  <p>
+    <a href="#sparkles-features">Features</a> •
+    <a href="#package-installation">Installation</a> •
+    <a href="#keyboard-cli-usage">CLI Usage</a> •
+    <a href="#computer-programmatic-api">API</a>
+  </p>
+</div>
 
 ---
 
-## Features
+## 💡 Why `smart-terminal-handler`?
 
-- 🔌 **Smart Port Killer**: Terminate zombie processes occupying development ports (e.g. `3000`). Maps automatically to platform-native commands (`lsof`/`kill` on macOS/Linux, `netstat`/`taskkill` on Windows).
-- 🧭 **Interactive CLI Wizard**: Run `sth` without arguments to access an interactive menu powered by terminal prompts.
-- 📡 **IP Address Lookup**: View local IPv4 network interface addresses and resolve your public IP instantly in a clean terminal layout.
-- 🔄 **DNS Cache Flusher**: Flush DNS caching configurations across Windows, macOS, and Linux systems.
-- 💣 **Dependency Nuker**: Wipe out `node_modules` and lock files recursively. Uses high-performance native deletion commands (e.g., `rmdir` on Windows) and automates a clean dependency reinstall via `npm`, `yarn`, or `pnpm`.
-- 📊 **System Resource Dashboard**: Quick check of CPU, memory, OS version, Node.js version, and system uptime in a beautiful terminal table.
+Developers constantly struggle with tedious, platform-dependent shell commands. `smart-terminal-handler` maps human-friendly commands to OS-specific terminal routines automatically under the hood for Windows, macOS, and Linux. No more memorizing `lsof -i`, `netstat -ano`, or `ipconfig /flushdns`!
+
+## ✨ Features
+
+- 🔌 **Smart Port Killer:** Identify and terminate zombie processes occupying development ports (e.g., `3000`). Maps automatically to platform-native commands (`lsof`/`kill` on macOS/Linux, `netstat`/`taskkill` on Windows).
+- 🧭 **Interactive CLI Wizard:** Run `sth` without arguments to access an interactive, prompt-based menu for a fully guided experience.
+- 📡 **IP Address Lookup:** Instantly view local IPv4 network interface addresses and resolve your public IP in a clean terminal layout.
+- 🔄 **DNS Cache Flusher:** Flush DNS caching configurations reliably across Windows, macOS, and Linux systems.
+- 💣 **Dependency Nuker:** Wipe out `node_modules` and lockfiles recursively using high-performance native commands, followed by an automated clean dependency reinstall (`npm`, `yarn`, or `pnpm`).
+- 📊 **System Resource Dashboard:** Get a quick overview of CPU, memory, OS version, Node.js version, and system uptime formatted in a beautiful terminal table.
 
 ---
 
-## Installation
+## 📦 Installation
 
-You can run the utility instantly using `npx`:
+You can run the utility instantly using `npx` without installing it permanently:
 
 ```bash
 npx smart-terminal-handler <command>
@@ -33,7 +47,7 @@ npm install -g smart-terminal-handler
 
 ---
 
-## CLI Usage
+## ⌨️ CLI Usage
 
 If you run the CLI without arguments, `sth` will launch an **interactive guided wizard**:
 
@@ -41,15 +55,15 @@ If you run the CLI without arguments, `sth` will launch an **interactive guided 
 sth
 ```
 
-### Supported CLI Commands
+### Supported Commands
 
 #### 1. Terminate Port (`kill`)
 Terminate processes listening on a target TCP port.
 ```bash
-# Terminate port 3000
+# Terminate processes on port 3000
 sth kill 3000
 
-# Open interactive selector showing all active listening ports
+# Open an interactive selector showing all active listening ports
 sth kill
 ```
 
@@ -59,8 +73,10 @@ Recursively delete `node_modules` and lockfiles in the current directory and run
 # Clean directory and reinstall (prompts for confirmation)
 sth nuke
 
-# Skip confirmation prompt (-y / --yes)
+# Skip confirmation prompt
 sth nuke -y
+# or
+sth nuke --yes
 
 # Clean without re-running dependency install
 sth nuke --no-reinstall
@@ -89,28 +105,38 @@ sth sys
 
 ---
 
-## Programmatic API
+## 💻 Programmatic API
 
-You can import `smart-terminal-handler` as a dependency in your projects (e.g., to build automation scripts, dev tasks, or pipelines).
+You can import `smart-terminal-handler` as a dependency in your own projects to build automation scripts, custom dev tasks, or pipelines.
 
 ```bash
 npm install smart-terminal-handler
 ```
 
-### Examples
+### Usage Examples
 
 ```javascript
-const { killPort, getActivePorts, getLocalIPs, getPublicIP, flushDNS, getSysInfo } = require('smart-terminal-handler');
+const { 
+  killPort, 
+  getActivePorts, 
+  getLocalIPs, 
+  getPublicIP, 
+  flushDNS, 
+  getSysInfo 
+} = require('smart-terminal-handler');
 
-// 1. Terminate a port
+// 1. Terminate a port programmatically
 killPort(3000)
-  .then((killed) => {
-    killed.forEach(proc => console.log(`Killed PID ${proc.pid} (${proc.command})`));
+  .then((killedProcesses) => {
+    killedProcesses.forEach(proc => {
+      console.log(`Killed PID ${proc.pid} (${proc.command})`);
+    });
   })
-  .catch((err) => console.error(err.message));
+  .catch((err) => console.error('Failed to kill port:', err.message));
 
 // 2. Fetch IP addresses
-getLocalIPs().forEach(iface => {
+const localIPs = getLocalIPs();
+localIPs.forEach(iface => {
   console.log(`Interface ${iface.interface}: ${iface.address}`);
 });
 
@@ -118,12 +144,16 @@ getPublicIP().then(ip => console.log(`Public IP: ${ip}`));
 
 // 3. Flush system DNS
 flushDNS().then(result => {
-  console.log(`Flushed DNS using command: ${result.cmd}`);
+  console.log(`Flushed DNS successfully using command: ${result.cmd}`);
 });
+
+// 4. Get System Info
+const sysInfo = getSysInfo();
+console.log(`Platform: ${sysInfo.platform}, Arch: ${sysInfo.arch}`);
 ```
 
 ---
 
-## License
+## 📜 License
 
-ISC License. Free to use and distribute.
+This project is licensed under the **ISC License**. Feel free to use and distribute it!
