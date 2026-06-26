@@ -1,18 +1,14 @@
-<div align="center">
-  <h1>🚀 Smart Terminal Handler (<code>sth</code>)</h1>
-  <p><strong>A zero-config, cross-platform CLI and Node.js toolkit designed to supercharge your daily terminal workflows.</strong></p>
+# 🚀 Smart Terminal Handler (`sth`)
 
-  [![npm version](https://img.shields.io/npm/v/smart-terminal-handler.svg?style=flat-square)](https://npmjs.org/package/smart-terminal-handler)
-  [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](https://opensource.org/licenses/ISC)
-  [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg?style=flat-square)](#)
+**A zero-config, cross-platform CLI and Node.js toolkit designed to supercharge your daily terminal workflows.**
 
-  <p>
-    <a href="#sparkles-features">Features</a> •
-    <a href="#package-installation">Installation</a> •
-    <a href="#keyboard-cli-usage">CLI Usage</a> •
-    <a href="#computer-programmatic-api">API</a>
-  </p>
-</div>
+[![npm version](https://img.shields.io/npm/v/smart-terminal-handler.svg?style=flat-square)](https://npmjs.org/package/smart-terminal-handler)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg?style=flat-square)](https://opensource.org/licenses/ISC)
+[![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey.svg?style=flat-square)](#)
+
+[Features](#sparkles-features) • [Installation](#package-installation) • [CLI Usage](#keyboard-cli-usage) • [API](#computer-programmatic-api)
+
+![Smart Terminal Handler Demo](./assets/cli_demo.svg)
 
 ---
 
