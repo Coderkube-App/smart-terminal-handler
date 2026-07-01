@@ -24,6 +24,8 @@ Developers constantly struggle with tedious, platform-dependent shell commands. 
 - 🔄 **DNS Cache Flusher:** Flush DNS caching configurations reliably across Windows, macOS, and Linux systems.
 - 💣 **Dependency Nuker:** Wipe out `node_modules` and lockfiles recursively using high-performance native commands, followed by an automated clean dependency reinstall (`npm`, `yarn`, or `pnpm`).
 - 📊 **System Resource Dashboard:** Get a quick overview of CPU, memory, OS version, Node.js version, and system uptime formatted in a beautiful terminal table.
+- 📡 **Network Diagnostics:** Scan common ports, resolve multiple DNS records in detail, and run a download speed and latency test.
+- 🔍 **Git Workspace Auditor:** Scan a directory for Git projects to see branch name, uncommitted status, ahead/behind commits relative to upstream, and remote URLs in a consolidated overview.
 
 ---
 
@@ -99,6 +101,32 @@ View real-time statistics regarding your CPU architecture, memory utilization, N
 sth sys
 ```
 
+#### 6. Network Diagnostics (`net`)
+Execute connection and network diagnostic helper commands:
+```bash
+# Scan common development ports on localhost
+sth net scan
+
+# Scan common ports on a custom host
+sth net scan 192.168.1.100
+
+# Resolve various DNS record types (A, AAAA, MX, CNAME, etc.) for a domain
+sth net lookup google.com
+
+# Run a live ping and download speed test
+sth net speed
+```
+
+#### 7. Git Workspace Auditor (`git`)
+Audit Git status across one or multiple repositories:
+```bash
+# Audit the current repository
+sth git
+
+# Audit all Git repositories in the specified parent folder
+sth git d:\Packages
+```
+
 ---
 
 ## 💻 Programmatic API
@@ -118,7 +146,11 @@ const {
   getLocalIPs, 
   getPublicIP, 
   flushDNS, 
-  getSysInfo 
+  getSysInfo,
+  scanPorts,
+  resolveDNS,
+  runSpeedTest,
+  auditGitWorkspace
 } = require('smart-terminal-handler');
 
 // 1. Terminate a port programmatically
@@ -146,6 +178,26 @@ flushDNS().then(result => {
 // 4. Get System Info
 const sysInfo = getSysInfo();
 console.log(`Platform: ${sysInfo.platform}, Arch: ${sysInfo.arch}`);
+
+// 5. Scan open ports programmatically
+scanPorts('127.0.0.1').then(ports => {
+  console.log('Open ports:', ports);
+});
+
+// 6. Query multiple DNS records
+resolveDNS('google.com').then(records => {
+  console.log('DNS records:', records);
+});
+
+// 7. Measure speed and latency
+runSpeedTest().then(test => {
+  console.log(`Latency: ${test.latencyMs}ms, Download speed: ${test.speedMbps} Mbps`);
+});
+
+// 8. Audit a directory containing Git repositories
+auditGitWorkspace('./packages').then(repos => {
+  console.log(repos);
+});
 ```
 
 ---
