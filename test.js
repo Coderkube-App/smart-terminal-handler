@@ -118,6 +118,36 @@ async function runTests() {
     assert.strictEqual(typeof info.user.homedir, 'string');
   });
 
+  // --- New Network & Git Tests ---
+  await testAsync('Network: scanPorts on 127.0.0.1 resolves successfully', async () => {
+    const openPorts = await api.scanPorts('127.0.0.1', [80, 443, 3000]);
+    assert.strictEqual(Array.isArray(openPorts), true);
+  });
+
+  await testAsync('Network: resolveDNS resolves records for google.com', async () => {
+    const records = await api.resolveDNS('google.com');
+    assert.strictEqual(typeof records, 'object');
+    assert.strictEqual(Array.isArray(records.A) || Array.isArray(records.NS), true);
+  });
+
+  await testAsync('Network: runSpeedTest completes and yields correct metrics', async () => {
+    const result = await api.runSpeedTest();
+    assert.strictEqual(typeof result.speedMbps, 'number');
+    assert.strictEqual(typeof result.bytes, 'number');
+    assert.strictEqual(result.bytes > 0, true);
+    console.log(`    (Latency: ${result.latencyMs}ms, Speed: ${result.speedMbps} Mbps)`);
+  });
+
+  await testAsync('Git: auditGitWorkspace audits the current repository', async () => {
+    const results = await api.auditGitWorkspace(process.cwd());
+    assert.strictEqual(Array.isArray(results), true);
+    assert.strictEqual(results.length > 0, true);
+    const repo = results[0];
+    assert.strictEqual(repo.success, true);
+    assert.strictEqual(typeof repo.branch, 'string');
+    assert.strictEqual(typeof repo.hasChanges, 'boolean');
+  });
+
   console.log(`\n🏁 Test Results: ${passed} passed, ${failed} failed.\n`);
   if (failed > 0) {
     process.exit(1);

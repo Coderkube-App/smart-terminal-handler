@@ -1,7 +1,8 @@
 const { getActivePorts, killPort } = require('./ports');
-const { getLocalIPs, getPublicIP, flushDNS } = require('./network');
+const { getLocalIPs, getPublicIP, flushDNS, scanPorts, resolveDNS, runSpeedTest } = require('./network');
 const { nukeDependencies } = require('./nuke');
 const { getSysInfo } = require('./sys');
+const { auditGitWorkspace } = require('./git');
 
 module.exports = {
   // Ports
@@ -12,10 +13,16 @@ module.exports = {
   getLocalIPs,
   getPublicIP,
   flushDNS,
+  scanPorts,
+  resolveDNS,
+  runSpeedTest,
 
   // Dependencies Clean
   nukeDependencies,
 
   // System
-  getSysInfo
+  getSysInfo,
+
+  // Git
+  auditGitWorkspace
 };
